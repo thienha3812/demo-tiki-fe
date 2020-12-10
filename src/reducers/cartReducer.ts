@@ -18,9 +18,10 @@ const cart = createSlice({
             }
 
         },
-        removeItem : (state,action) => console.log(action.payload)
+        removeItem : (state,action) => console.log(action.payload),
+        setEmpty : (state) => void(state.cart = [] as any)
     }
 })
 export const cartReducer = cart.reducer
 export const cartSelector = (state:any) => state.cart
-export const {addItem,removeItem } = cart.actions
+export const {addItem,removeItem,setEmpty } = cart.actions

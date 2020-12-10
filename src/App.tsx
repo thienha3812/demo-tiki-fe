@@ -17,6 +17,7 @@ import ProductDetail from './containers/product-detail';
 import Login from './containers/login';
 import store  from './store'
 import Cart from './containers/cart';
+import Search from './containers/search';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path={"/detail-product/:product_id?"} component={ProductDetail} />
           <Route path={"/login"} component={Login} />
           <Route path={"/cart"}  component={Cart} />
+          <Route path={"/search"} component={Search} />
           <Redirect from="/" to="/home" />
           <ToastContainer/>
         </Switch>

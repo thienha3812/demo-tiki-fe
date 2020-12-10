@@ -79,7 +79,7 @@ const SimilarProduct = (props: any) => {
             <div style={{marginTop:"20px",display:"flex",width:"100%",backgroundColor:"white"}}>
                 {products.map((p,index)=>(
                     <div key={index} style={{width:"19%"}}>
-                        <Card {...p.fields} img_src={p.fields.images[0].src} title={p.fields.product_name} />
+                        <Card {...p} img_src={p.images[0].src} title={p.product_name} />
                     </div>
                 ))}
             </div>

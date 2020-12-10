@@ -10,8 +10,7 @@ const HomeDeal = (props: any) => {
     const { products } = useContext(Context)
     const history = useHistory()
     const navigateTo = (p:any) =>{
-        console.log(p)
-        history.push(`/detail-product/${p.pk}`)
+        history.push(`/detail-product/${p.id}`)
     }
     return (
         <React.Fragment>
@@ -34,7 +33,7 @@ const HomeDeal = (props: any) => {
                         {
                             products.map((p, index) => (
                                 <div onClick={()=>navigateTo(p)} key={index} style={{ width: "19%" }}>
-                                    <Card {...p.fields} img_src={p.fields.images[0].src} title={p.fields.product_name} />
+                                    <Card {...p} img_src={p.images[0].src} title={p.product_name} />
                                 </div>                                
                             ))
                         }

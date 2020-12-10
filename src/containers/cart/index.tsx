@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { cartSelector } from '../../reducers'
+import { cartSelector, setEmpty } from '../../reducers'
 import { convertToVnd } from '../../ultis'
 import { Modal, Button, Input } from 'antd';
 import OrderService from '../../services/order'
@@ -28,6 +28,7 @@ const PlaceButton = styled.button`
 const Cart = (props: any) => {
     const [form, setForm] = useState(({ address: "" }))
     const { cart } = useSelector(cartSelector)
+    const dispatch = useDispatch()
     const [openConfirmModal, setOpenConfirmModal] = useState(false)
     const handlePlaceOrder = async () => {
         OrderService.placeOrder(cart, form.address).then(result => {
@@ -35,8 +36,10 @@ const Cart = (props: any) => {
                 type: 'success'
             })
             setOpenConfirmModal(false)
+            dispatch(setEmpty())
+
         }).catch(err => {
-            if (err.response.data) {
+            if(err.response){
                 const { message } = err.response.data
                 toast(message, {
                     type: 'warning'

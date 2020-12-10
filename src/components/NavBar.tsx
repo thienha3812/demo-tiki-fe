@@ -1,6 +1,6 @@
 import { Col, Input, Row ,Button as AnButton} from 'antd'
 import Grid from 'antd/lib/card/Grid'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import Logo from '../assets/images/logo.png'
 import {FaUser} from 'react-icons/fa'
@@ -8,7 +8,7 @@ import {IoMdNotifications} from 'react-icons/io';
 import {HiShoppingCart} from 'react-icons/hi';
 import {AiOutlineMenu} from 'react-icons/ai';
 import {RiArrowDownSLine} from 'react-icons/ri';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {  userSelector,logout, cartSelector } from '../reducers'
 const Header = styled.header`
@@ -29,9 +29,17 @@ const NavBar = (props:any) =>{
     const {account_info,isLogged} = useSelector(userSelector)
     const {cart} = useSelector(cartSelector)
     const dispatch = useDispatch()
+    const history = useHistory()
     const handleLogout = () =>{
         dispatch(logout())
     }
+    const handleSearch  = (event:any) =>{
+        history.push(`/search?p=${event.target.value}`)
+    }
+    const handleButtonSearch  = (value:any) =>{
+        history.replace(`/search?p=${value}`)
+    }
+    
     return( 
         <React.Fragment>
             <Header>
@@ -40,7 +48,7 @@ const NavBar = (props:any) =>{
                         <img src={Logo}     />
                     </Link>
                     <div style={{display:'flex',alignItems:'center',width:'25%'}}>
-                        <Search  placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ..." size="large" />
+                        <Search  onSearch={(value)=> handleButtonSearch(value)}  onPressEnter={handleSearch}  placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn ..." size="large" />
                     </div>
                     <div style={{display:'flex',alignItems:'center',width:'35%'}}>
                         <div style={{width:"25%"}}>

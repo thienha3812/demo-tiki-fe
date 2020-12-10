@@ -12,7 +12,10 @@ class ProductService {
     }
     static async getProductById(product_id: number) {
         const { data } = await apiConfig.post(`/product/${product_id}`)
-        console.log(data)
+        return data
+    }
+    static async searchProducts(text_search:String|null){
+        const {data} = await apiConfig.post('/product/search',{text_search})
         return data
     }
 }
